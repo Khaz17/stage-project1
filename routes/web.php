@@ -23,6 +23,8 @@ Route::post('/ajout-typemoteur', [TypeMoteursController::class, 'addTypemoteur']
 Route::get('/getTypemoteursList',[TypeMoteursController::class, 'getTypemoteursList'])->name('get.typemoteurs.list');
 Route::get('/getTypemoteurDetails',[TypeMoteursController::class, 'getTypemoteurDetails'])->name('get.typemoteur.details');
 Route::post('/updateTypemoteur',[TypeMoteursController::class, 'updateTypemoteur'])->name('update.typemoteur.details');
+Route::post('/deleteTypemoteur',[TypeMoteursController::class, 'deleteTypemoteur'])->name('delete.typemoteur');
+
 
 // Example Routes
 Route::view('/', 'landing');

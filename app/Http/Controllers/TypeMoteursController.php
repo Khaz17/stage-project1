@@ -87,4 +87,15 @@ class TypeMoteursController extends Controller
         }
 
     }
+
+    public function deleteTypemoteur(Request $request){
+        $typemoteur = TypeMoteur::find($request->typemoteur_id);
+        $query = $typemoteur->delete();
+
+        if(!$query){
+            return response()->json(['code'=>0, 'msg'=>"Oups ! Quelque chose s'est mal passé"]);
+        } else {
+            return response()->json(['code'=>1, 'msg'=>'Type de moteur supprimé !']);
+        }
+    }
 }
