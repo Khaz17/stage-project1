@@ -38,7 +38,7 @@ $(function(){
             dataType: 'json',
             contentType: false,
             beforeSend: function(){
-
+                $(form).find('span.error-text').text('');
             },
             success: function(data) {
                 if (data.code == 0) {
@@ -46,13 +46,12 @@ $(function(){
                         $(form).find('span.'+prefix+'_error').text(val[0]);
                     });
                 } else {
-                    $('editTypemoteur').modal('hide');
-                    $('editTypemoteur').find('form')[0].reset();
+                    table.ajax.reload(null, false);
+                    $('.editTypemoteur').modal('hide');
+                    $('.editTypemoteur').find('form')[0].reset();
+                    toastr.success(data.msg);
                 }
             },
-            // error: function(xhr) {
-            //     alert('Ewo')
-            // }
         });
     });
 

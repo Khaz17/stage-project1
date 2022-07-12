@@ -27,7 +27,7 @@
                     </div>
                     <div class="block-content block-content-full text-end bg-body form-group">
                         <button type="button" class="btn btn-sm btn-alt-secondary me-1" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Confirmer</button>
+                        <button type="submit" class="btn btn-sm btn-primary">Confirmer</button>
                     </div>
                 </form>
 
