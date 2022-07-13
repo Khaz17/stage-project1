@@ -8,7 +8,7 @@
       <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
         <div class="flex-grow-1">
           <h1 class="h3 fw-bold mb-2">
-            Types de moteurs
+            Marques de voitures
           </h1>
         </div>
         <nav class="flex-shrink-0 mt-3 mt-sm-0 ms-sm-3" aria-label="breadcrumb">
@@ -17,7 +17,7 @@
               <a class="link-fx" href="javascript:void(0)">App</a>
             </li>
             <li class="breadcrumb-item" aria-current="page">
-              Types de moteurs
+                Marques de voitures
             </li>
           </ol>
         </nav>
@@ -37,11 +37,11 @@
     <div class="row block-content block-content-full">
         <div class="col-md-8">
             <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
-            <div id="typesmoteurs-table">
+            <div id="marques-table">
                 <table class="table table-bordered table-vcenter table-striped fs-sm">
                     <thead>
                         <th class="text-center" style="width: 80px;">#</th>
-                        <th>Libellé</th>
+                        <th>Nom</th>
                         <th>Actions</th>
                     </thead>
                     <tbody></tbody>
@@ -51,14 +51,14 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Ajouter un nouveau type</div>
+                <div class="card-header">Ajouter une nouvelle marque</div>
                 <div class="card-body">
-                    <form action="{{ route('add.typemoteur' )}}" method="post" id="add-typemoteur-form">
+                    <form action="{{ route('add.marque' )}}" method="post" id="add-marque-form">
                         @csrf
                         <div class="form-group">
-                            <label for="libelle_tm">Libellé</label>
-                            <input class="form-control" type="text" name="libelle_tm" id="libelle_tm">
-                            <span class="text-danger error-text libelle_tm_error"></span>
+                            <label for="nom_m">Nom</label>
+                            <input class="form-control" type="text" name="nom_m" id="nom_m">
+                            <span class="text-danger error-text nom_m_error"></span>
                         </div>
                         <br>
                         <div class="form-group">
@@ -70,11 +70,11 @@
         </div>
     </div>
 
-    @include('typesmoteurs.edit-typemoteur-modal')
+    @include('marques.edit-marque-modal')
     <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
     <script src="{{ asset('datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('datatables/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{ asset('js/functions/typesmoteurs.js') }}"></script>
+    <script src="{{ asset('js/functions/marques.js') }}"></script>
 
     {{-- <script>
 

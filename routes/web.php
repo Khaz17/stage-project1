@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TypeMoteursController;
+use App\Http\Controllers\MarqueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,13 @@ Route::get('/getTypemoteurDetails',[TypeMoteursController::class, 'getTypemoteur
 Route::post('/updateTypemoteur',[TypeMoteursController::class, 'updateTypemoteur'])->name('update.typemoteur.details');
 Route::post('/deleteTypemoteur',[TypeMoteursController::class, 'deleteTypemoteur'])->name('delete.typemoteur');
 
+
+Route::get('/marques-list',[MarqueController::class, 'index'])->name('marques.list');
+Route::post('/ajout-marque', [MarqueController::class, 'addMarque'])->name('add.marque');
+Route::get('/getMarquesList',[MarqueController::class, 'getMarquesList'])->name('get.marques.list');
+Route::get('/getMarqueDetails',[MarqueController::class, 'getMarqueDetails'])->name('get.marque.details');
+Route::post('/updateMarque',[MarqueController::class, 'updateMarque'])->name('update.marque.details');
+Route::post('/deleteMarque',[MarqueController::class, 'deleteMarque'])->name('delete.marque');
 
 // Example Routes
 Route::view('/', 'landing');
