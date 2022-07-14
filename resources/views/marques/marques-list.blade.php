@@ -29,16 +29,11 @@
   <div class="content">
    <!-- Dynamic Table Full -->
    <div class="block block-rounded">
-    {{-- <div class="block-header block-header-default">
-      <h3 class="block-title">
-        Dynamic Table <small>Full</small>
-      </h3>
-    </div> --}}
     <div class="row block-content block-content-full">
         <div class="col-md-8">
             <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
             <div id="marques-table">
-                <table class="table table-bordered table-vcenter table-striped fs-sm">
+                <table class="table table-bordered table-vcenter table-striped table-responsive fs-sm">
                     <thead>
                         <th class="text-center" style="width: 80px;">#</th>
                         <th>Nom</th>

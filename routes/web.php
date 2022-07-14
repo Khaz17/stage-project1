@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TypeMoteursController;
 use App\Http\Controllers\MarqueController;
+use App\Http\Controllers\ModeleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,13 @@ Route::get('/getMarquesList',[MarqueController::class, 'getMarquesList'])->name(
 Route::get('/getMarqueDetails',[MarqueController::class, 'getMarqueDetails'])->name('get.marque.details');
 Route::post('/updateMarque',[MarqueController::class, 'updateMarque'])->name('update.marque.details');
 Route::post('/deleteMarque',[MarqueController::class, 'deleteMarque'])->name('delete.marque');
+
+Route::get('/modeles-list',[ModeleController::class, 'index'])->name('modeles.list');
+Route::post('/ajout-modele', [ModeleController::class, 'addModele'])->name('add.modele');
+Route::get('/getModelesList',[ModeleController::class, 'getModelesList'])->name('get.modeles.list');
+Route::get('/getModeleDetails',[ModeleController::class, 'getModeleDetails'])->name('get.modele.details');
+Route::post('/updateModele',[ModeleController::class, 'updateModele'])->name('update.modele.details');
+Route::post('/deleteModele',[ModeleController::class, 'deleteModele'])->name('delete.modele');
 
 // Example Routes
 Route::view('/', 'landing');

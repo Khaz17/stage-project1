@@ -38,7 +38,7 @@
         <div class="col-md-8">
             <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
             <div id="typesmoteurs-table">
-                <table class="table table-bordered table-vcenter table-striped fs-sm">
+                <table class="table table-bordered table-vcenter table-striped table-responsive fs-sm">
                     <thead>
                         <th class="text-center" style="width: 80px;">#</th>
                         <th>Libellé</th>

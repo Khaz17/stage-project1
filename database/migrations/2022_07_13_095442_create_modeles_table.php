@@ -15,7 +15,10 @@ class CreateModelesTable extends Migration
     {
         Schema::create('modeles', function (Blueprint $table) {
             $table->id();
+            $table->string('libelle_m');
             $table->timestamps();
+
+            $table->foreignId('marque_id')->constrained();
         });
     }
 

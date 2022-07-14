@@ -10,4 +10,8 @@ class Marque extends Model
     use HasFactory;
 
     protected $fillable = ['nom_m'];
+
+    public function modeles(){
+        return $this->hasMany(Modele::class);
+    }
 }

@@ -261,7 +261,7 @@
                     </a>
                   </li>
                   <li class="nav-main-item">
-                    <a class="nav-main-link{{ request()->is('pages/slick') ? ' active' : '' }}" href="/pages/slick">
+                    <a class="nav-main-link{{ request()->is('modeles/modeles.list') ? ' active' : '' }}" href="{{ route('modeles.list')}}">
                       <span class="nav-main-link-name">Modèles</span>
                     </a>
                   </li>
