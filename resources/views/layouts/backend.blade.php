@@ -256,8 +256,8 @@
                 </a>
                 <ul class="nav-main-submenu">
                   <li class="nav-main-item">
-                    <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
-                      <span class="nav-main-link-name">Marques</span>
+                    <a class="nav-main-link{{ request()->is('marques/marques.list') ? ' active' : '' }}" href="{{ route('marques.list')}}">
+                      <span class="nav-main-link-name">Marques de voitures</span>
                     </a>
                   </li>
                   <li class="nav-main-item">
