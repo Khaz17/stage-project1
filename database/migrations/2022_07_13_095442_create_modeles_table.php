@@ -19,6 +19,7 @@ class CreateModelesTable extends Migration
             $table->timestamps();
 
             $table->foreignId('marque_id')->constrained();
+            $table->unique(['libelle_m', 'marque_id']);
         });
     }
 

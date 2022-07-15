@@ -6,10 +6,16 @@ $(function(){
         columns:[
             {data:'id', name:'id'},
             {data:'libelle_m', name:'libelle_m'},
-            {data:'marque_id', name:'marque_id'},
+            {data:'nom_m', name:'nom_m'},
             {data:'actions', name:'actions'},
         ]
     })
+    // document.onload(getModeles());
+    // function getModeles(){
+    //     $.get('/getModelesList', function(data){
+
+    //     },'json');
+    // }
 
     $(document).on('click','#editModeleBtn', function(){
         var modele_id = $(this).data('id');
@@ -44,6 +50,7 @@ $(function(){
                     $.each(data.error, function(prefix, val){
                         $(form).find('span.'+prefix+'_error').text(val[0]);
                     });
+                    toastr.warning(data.msg);
                 } else {
                     table.ajax.reload(null, false);
                     $('.editModele').modal('hide');
@@ -51,6 +58,9 @@ $(function(){
                     toastr.success(data.msg);
                 }
             },
+            error: function(){
+                alert('Error!')
+            }
         });
     });
 
@@ -114,6 +124,7 @@ $(function(){
                     $.each(data.error, function(prefix, val){
                         $(form).find('span.'+prefix+'_error').text(val[0]);
                     })
+                    toastr.warning(data.msg);
                 } else {
                     $(form)[0].reset();
                     toastr.success(data.msg);

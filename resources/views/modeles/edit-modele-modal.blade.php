@@ -14,7 +14,7 @@
                 <form action="{{ route('update.modele.details' )}}" method="post" id="edit-modele-form">
                     <div class="block-content fs-sm">
                         @csrf
-                        <input type="hidden" name="mid">
+                        <input type="hidden" name="mrid">
                         <div class="form-group">
                             <label for="nom_m">Libellé</label>
                             <input class="form-control" type="text" name="libelle_m" id="libelle_m">
