@@ -13460,7 +13460,7 @@ small,
   transition: opacity 0.25s ease-out;
   width: 100%;
   margin: 0 auto;
-  padding: 1.25rem 1.25rem 1px;
+  padding: 1.25rem 0.75rem 1px;
   overflow-x: visible;
 }
 .block-content > .pull-t,
@@ -17813,6 +17813,14 @@ a.text-smooth-lighter:hover, a.text-smooth-lighter:focus {
 .fadeOutUpBig {
   -webkit-animation-name: fadeOutUpBig;
           animation-name: fadeOutUpBig;
+}
+
+.form-box legend {
+    font-size: inherit;
+    line-height: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #555;
 }
 
 @-webkit-keyframes flip {

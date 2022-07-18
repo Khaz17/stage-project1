@@ -34,15 +34,16 @@
         Dynamic Table <small>Full</small>
       </h3>
     </div> --}}
-    <div class="row block-content block-content-full">
+    <div class="row block-content block-content-full" style="">
         <div class="col-md-8">
             <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
-            <div id="typesmoteurs-table">
-                <table class="table table-bordered table-vcenter table-striped table-responsive fs-sm">
-                    <thead>
-                        <th class="text-center" style="width: 80px;">#</th>
-                        <th>Libellé</th>
-                        <th>Actions</th>
+            <div class="table-responsive" id="typesmoteurs-table">
+                <table class="table table-bordered table-vcenter table-striped fs-sm">
+                    <thead style="width: 100%">
+                        <th><input type="checkbox" class="form-check-input" name="typemoteur_checkbox"><label></label></th>
+                        <th class="text-center" style="width: 10%;">#</th>
+                        <th style="width: 60%">Libellé</th>
+                        <th style="width: 30%;">Actions<button type="button" name="" id="" class="btn btn-danger btn-sm float-end"><i class="fa fa-trash" aria-hidden="true"></i></button></th>
                     </thead>
                     <tbody></tbody>
                 </table>
@@ -56,13 +57,13 @@
                     <form action="{{ route('add.typemoteur' )}}" method="post" id="add-typemoteur-form">
                         @csrf
                         <div class="form-group">
-                            <label for="libelle_tm">Libellé</label>
+                            <label for="libelle_tm" class="form-label">Libellé</label>
                             <input class="form-control" type="text" name="libelle_tm" id="libelle_tm">
                             <span class="text-danger error-text libelle_tm_error"></span>
                         </div>
                         <br>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-block btn-success">Enregistrer</button>
+                            <button type="submit" class="btn btn-success btn-lg btn-block">Enregistrer</button>
                         </div>
                     </form>
                 </div>

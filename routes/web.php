@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConducteurController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TypeMoteursController;
 use App\Http\Controllers\MarqueController;
@@ -41,6 +42,15 @@ Route::get('/getModelesList',[ModeleController::class, 'getModelesList'])->name(
 Route::get('/getModeleDetails',[ModeleController::class, 'getModeleDetails'])->name('get.modele.details');
 Route::post('/updateModele',[ModeleController::class, 'updateModele'])->name('update.modele.details');
 Route::post('/deleteModele',[ModeleController::class, 'deleteModele'])->name('delete.modele');
+
+Route::get('/conducteurs-list',[ConducteurController::class, 'index'])->name('conducteurs.list');
+Route::get('/newConducteur',[ConducteurController::class, 'showAddPage'])->name('new.conducteur');
+
+Route::post('/ajout-conducteur', [ConducteurController::class, 'addConducteur'])->name('add.conducteur');
+Route::get('/getConducteursList',[ConducteurController::class, 'getConducteursList'])->name('get.conducteurs.list');
+Route::get('/getConducteurDetails',[ConducteurController::class, 'getConducteurDetails'])->name('get.conducteur.details');
+Route::post('/updateConducteur',[ConducteurController::class, 'updateConducteur'])->name('update.conducteur.details');
+Route::post('/deleteConducteur',[ConducteurController::class, 'deleteConducteur'])->name('delete.conducteur');
 
 // Example Routes
 Route::view('/', 'landing');

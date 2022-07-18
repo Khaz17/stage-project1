@@ -16,7 +16,7 @@
                         @csrf
                         <input type="hidden" name="mrid">
                         <div class="form-group">
-                            <label for="nom_m">Libellé</label>
+                            <label for="nom_m" class="form-label">Libellé</label>
                             <input class="form-control" type="text" name="libelle_m" id="libelle_m">
                             <span class="text-danger error-text libelle_m_error"></span>
                         </div>

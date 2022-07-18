@@ -4,9 +4,10 @@ $(function(){
         info:true,
         ajax:"/getTypemoteursList",
         columns:[
+            {data:'checkbox', name:'checkbox', orderable:false, searchable:false},
             {data:'id', name:'id'},
             {data:'libelle_tm', name:'libelle_tm'},
-            {data:'actions', name:'actions'},
+            {data:'actions', name:'actions', orderable:false, searchable:false},
         ]
     })
 

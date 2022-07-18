@@ -51,9 +51,11 @@ class TypeMoteursController extends Controller
                             </button>
                           </div>';
                         })
-                        ->rawColumns(['actions'])
+                        ->addColumn('checkbox', function($row){
+                            return '<input class="form-check-input" type="checkbox" value="" data-id="'.$row['id'].'" name="typemoteur_checkbox"><label></label>';
+                        })
+                        ->rawColumns(['actions','checkbox'])
                         ->make(true);
-        // return response()->json($typemoteurs);
     }
 
     //Get détails type moteur

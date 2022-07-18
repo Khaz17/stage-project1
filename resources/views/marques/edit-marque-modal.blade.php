@@ -16,7 +16,7 @@
                         @csrf
                         <input type="hidden" name="mid">
                         <div class="form-group">
-                            <label for="nom_m">Libellé</label>
+                            <label for="nom_m" class="form-label">Libellé</label>
                             <input class="form-control" type="text" name="nom_m" id="nom_m">
                             <span class="text-danger error-text nom_m_error"></span>
                         </div>

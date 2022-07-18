@@ -16,7 +16,7 @@
                         @csrf
                         <input type="hidden" name="tmid">
                         <div class="form-group">
-                            <label for="libelle_tm">Libellé</label>
+                            <label for="libelle_tm" class="form-label">Libellé</label>
                             <input class="form-control" type="text" name="libelle_tm" id="libelle_tm">
                             <span class="text-danger error-text libelle_tm_error"></span>
                         </div>
