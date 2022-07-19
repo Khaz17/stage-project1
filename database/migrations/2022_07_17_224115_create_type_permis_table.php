@@ -15,7 +15,9 @@ class CreateTypePermisTable extends Migration
     {
         Schema::create('type_permis', function (Blueprint $table) {
             $table->id();
-            $table->
+            $table->string('nomination');
+            $table->string('cas');
+            $table->integer('age_minimum');
             $table->timestamps();
         });
     }

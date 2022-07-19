@@ -46,7 +46,7 @@ Route::post('/deleteModele',[ModeleController::class, 'deleteModele'])->name('de
 Route::get('/conducteurs-list',[ConducteurController::class, 'index'])->name('conducteurs.list');
 Route::get('/newConducteur',[ConducteurController::class, 'showAddPage'])->name('new.conducteur');
 
-Route::post('/ajout-conducteur', [ConducteurController::class, 'addConducteur'])->name('add.conducteur');
+Route::post('/save-conducteur', [ConducteurController::class, 'saveConducteur'])->name('save.conducteur');
 Route::get('/getConducteursList',[ConducteurController::class, 'getConducteursList'])->name('get.conducteurs.list');
 Route::get('/getConducteurDetails',[ConducteurController::class, 'getConducteurDetails'])->name('get.conducteur.details');
 Route::post('/updateConducteur',[ConducteurController::class, 'updateConducteur'])->name('update.conducteur.details');

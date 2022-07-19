@@ -17,12 +17,13 @@ class CreateConducteursTable extends Migration
             $table->id();
             $table->string('nom_c');
             $table->string('prenom_c');
+            $table->date('date_naissance_c');
             $table->string('telephone_c');
             $table->string('email_c');
             $table->string('adresse_c');
             $table->string('type_permis');
-            $table->date('date_delivrance_permis');
-            $table->date('date_renouvellement_permis');
+            $table->date('delivrance_p');
+            $table->date('expiration_p');
             $table->string('scan_permis');
             $table->timestamps();
         });
