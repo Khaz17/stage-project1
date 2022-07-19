@@ -27,7 +27,6 @@ class ConducteurController extends Controller
         if ($check>0) {
             return response()->json(['code'=>0, 'msg'=>"Conducteur déjà enregistré"]);
         } else {
-
             $conducteur = new Conducteur();
             $conducteur->nom_c = $request->nom_c;
             $conducteur->prenom_c = $request->prenom_c;
@@ -38,14 +37,26 @@ class ConducteurController extends Controller
             $conducteur->type_permis = $request->type_permis;
             $conducteur->delivrance_p = $request->delivrance_p;
             $conducteur->expiration_p = $request->expiration_p;
-            $conducteur->scan_permis = $request->scan_permis;
 
-            $query = $conducteur->save();
+            if ($request->hasfile('scan_permis')) {
+	            $fileUrl = $request->file('scan_permis');
+	            $fileNameToStore = uniqid().'_' .time().'.'.$fileUrl->getClientOriginalExtension();
+	            $destinationPath = public_path('/uploads/conducteurs/');
+	            $upload = $fileUrl->move($destinationPath, $fileNameToStore); //Ajouter scan
+                $conducteur->scan_permis = $fileNameToStore;
+                $query = $conducteur->save();
+            }
 
-            if ($query) {
-                return back()->with('success','Le nouveau conducteur a été enregistré');
+            if ($upload) {
+
+                if ($query) {
+                    return back()->with('success','Le nouveau conducteur a été enregistré');
+                } else {
+                    return back()->with('fail',"Quelque chose s'est mal passé");
+                }
+
             } else {
-                return back()->with('fail',"Quelque s'est mal passé");
+                return back()->with('fail',"Quelque chose s'est mal passé");
             }
 
             // return view('conducteurs.conducteurs-list');

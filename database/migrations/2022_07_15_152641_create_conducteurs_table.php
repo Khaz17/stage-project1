@@ -24,7 +24,7 @@ class CreateConducteursTable extends Migration
             $table->string('type_permis');
             $table->date('delivrance_p');
             $table->date('expiration_p');
-            $table->string('scan_permis');
+            $table->string('scan_permis')->nullable(true);
             $table->timestamps();
         });
     }

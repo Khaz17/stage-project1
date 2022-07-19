@@ -47,7 +47,7 @@
                 </h3>
             </div>
             <div class="block-content">
-                <form action="{{ route('save.conducteur') }}" method="POST">
+                <form action="{{ route('save.conducteur') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-lg-6 form-box">

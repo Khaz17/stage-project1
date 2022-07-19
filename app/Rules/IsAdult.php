@@ -37,6 +37,6 @@ class IsAdult implements Rule
      */
     public function message()
     {
-        return 'Le conducteur est trop jeune ?';
+        return 'Le conducteur est trop jeune';
     }
 }

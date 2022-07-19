@@ -34,7 +34,7 @@ class ConducteurSaveRequest extends FormRequest
             'type_permis' => 'required|not_in:0',
             'delivrance_p' => 'required|date|before_or_equal:today',
             'expiration_p' => 'required|date|after:delivrance_p',
-            'scan_permis' => 'required|unique:conducteurs|string',
+            'scan_permis' => 'required|unique:conducteurs|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 
