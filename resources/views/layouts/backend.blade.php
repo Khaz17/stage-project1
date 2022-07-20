@@ -307,7 +307,7 @@
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
                                     <a class="nav-main-link{{ request()->is('conducteurs/conducteurs.list') ? ' active' : '' }}"
-                                        href="{{ route('get.conducteurs.list') }}">
+                                        href="{{ route('conducteurs.list') }}">
                                         <span class="nav-main-link-name">Liste des conducteurs</span>
                                     </a>
                                 </li>
@@ -614,8 +614,10 @@
             </div>
         </footer>
         <!-- END Footer -->
+        </div>
     </div>
     <!-- END Page Container -->
+
 
     <!-- OneUI Core JS -->
     <script src="{{ mix('js/oneui.app.js') }}"></script>

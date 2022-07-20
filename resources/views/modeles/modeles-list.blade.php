@@ -44,29 +44,7 @@
                                 <th>Marque</th>
                                 <th>Actions</th>
                             </thead>
-                            <tbody>
-                                {{-- @foreach ($modeles as $modele)
-                                    <tr>
-                                        <td>{{ $modele->id }}</td>
-                                        <td>{{ $modele->libelle_m }}</td>
-                                        <td>{{ $modele->nom_m }}</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-alt-primary"
-                                                    data-id="{{ $modele->id }}" id="editModeleBtn" data-bs-toggle="tooltip"
-                                                    title="Modifier modèle">
-                                                    <i class="fa fa-fw fa-pencil-alt"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-sm btn-alt-danger"
-                                                    data-id="{{ $modele->id }}" id="deleteModeleBtn" data-bs-toggle="tooltip"
-                                                    title="Supprimer modèle">
-                                                    <i class="fa fa-fw fa-times"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach --}}
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
 

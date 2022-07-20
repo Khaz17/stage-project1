@@ -45,10 +45,11 @@ Route::post('/deleteModele',[ModeleController::class, 'deleteModele'])->name('de
 
 Route::get('/conducteurs-list',[ConducteurController::class, 'index'])->name('conducteurs.list');
 Route::get('/newConducteur',[ConducteurController::class, 'showAddPage'])->name('new.conducteur');
+Route::get('/editConducteur/{id}',[ConducteurController::class, 'showEditPage'])->name('edit.conducteur');
 
 Route::post('/save-conducteur', [ConducteurController::class, 'saveConducteur'])->name('save.conducteur');
 Route::get('/getConducteursList',[ConducteurController::class, 'getConducteursList'])->name('get.conducteurs.list');
-Route::get('/getConducteurDetails',[ConducteurController::class, 'getConducteurDetails'])->name('get.conducteur.details');
+Route::get('/getConducteurDetails/{id}',[ConducteurController::class, 'getConducteurDetails'])->name('get.conducteur.details');
 Route::post('/updateConducteur',[ConducteurController::class, 'updateConducteur'])->name('update.conducteur.details');
 Route::post('/deleteConducteur',[ConducteurController::class, 'deleteConducteur'])->name('delete.conducteur');
 
