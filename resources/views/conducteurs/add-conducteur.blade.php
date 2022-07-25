@@ -25,12 +25,6 @@
     </div>
     <!-- END Hero -->
 
-    @if (Session::get('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success')}}
-        </div>
-    @endif
-
     @if (Session::get('fail'))
         <div class="alert alert-danger">
             {{ Session::get('fail')}}
@@ -88,7 +82,7 @@
                                 <select class="form-select @error('type_permis') is-invalid @enderror" id="type_permis" name="type_permis" aria-label="Floating label select example" value="{{ old('type_permis') }}">
                                     <option value="0" selected>Choisissez une option</option>
                                     @foreach ($types_permis as $type_permis)
-                                        <option value="{{ $type_permis }}">{{ $type_permis }}</option>
+                                        <option value="{{ $type_permis }}" {{ (old('type_permis') == $type_permis ? "selected":"") }}>{{ $type_permis }}</option>
                                     @endforeach
                                 </select>
                                 <span class="text-danger error-text">@error('type_permis') <p style="font-size:14px">{{ $message }}</p> @enderror</span>
@@ -106,8 +100,8 @@
                             </div>
                             <div class="form-floating mb-3 overflow-hidden">
                                 <div class="mb-2">
-                                    <label class="form-label" for="scan_permis">Scan du permis de conduire</label>
-                                    <input class="form-control @error('scan_permis') is-invalid @enderror" type="file" id="scan_permis" name="scan_permis" value="{{ old('scan_permis') }}">
+                                    <label class="form-label" for="scan_permis">Scans du permis de conduire</label>
+                                    <input class="form-control @error('scan_permis') is-invalid @enderror" type="file" id="scan_permis" name="scan_permis[]" multiple value="{{ old('scan_permis') }}">
                                     <span class="text-danger error-text">@error('scan_permis') <p style="font-size:14px">{{ $message }}</p> @enderror</span>
                                 </div>
                             </div>

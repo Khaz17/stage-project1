@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\TypemoteurSaveRequest;
 use App\Models\TypeMoteur;
 
 use Illuminate\Http\Request;
@@ -22,8 +24,8 @@ class TypeMoteursController extends Controller
             'libelle_tm.string' => 'Le libellé doit être une chaîne de charactères',
             'libelle_tm.unique' => 'Type déjà enregistré',
         ]);
-
-        if(!$validator->passes()){
+        
+        if (!$validator->passes()) {
             return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
         } else {
             $typemoteur = new TypeMoteur();
@@ -37,6 +39,7 @@ class TypeMoteursController extends Controller
             }
         }
     }
+
 
     public function getTypemoteursList(){
         $typemoteurs = TypeMoteur::all();
@@ -64,28 +67,17 @@ class TypeMoteursController extends Controller
         return response()->json(['code'=>1,'result'=>$typemoteur]);
     }
 
-    public function updateTypemoteur(Request $request){
+    public function updateTypemoteur(TypeMoteurSaveRequest $request){
         $typemoteur_id = $request->tmid;
 
-        $validator = \Validator::make($request->all(),[
-            'libelle_tm' => 'required|string|unique:type_moteurs,libelle_tm,'.$typemoteur_id,
-        ],[
-            'libelle_tm.required' => '?',
-            'libelle_tm.string' => 'Le libellé doit être une chaîne de charactères',
-            'libelle_tm.unique' => 'Type déjà enregistré',
-        ]);
-        if (!$validator->passes()) {
-            return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        } else {
-            $typemoteur = TypeMoteur::find($typemoteur_id);
-            $typemoteur->libelle_tm = $request->libelle_tm;
-            $query = $typemoteur->save();
+        $typemoteur = TypeMoteur::find($typemoteur_id);
+        $typemoteur->libelle_tm = $request->libelle_tm;
+        $query = $typemoteur->save();
 
-            if(!$query){
-                return response()->json(['code'=>0, 'msg'=>"Oups ! Quelque chose s'est mal passé"]);
-            } else {
-                return response()->json(['code'=>1, 'msg'=>'Type de moteur mis à jour !']);
-            }
+        if(!$query){
+            return response()->json(['code'=>0, 'msg'=>"Oups ! Quelque chose s'est mal passé"]);
+        } else {
+            return response()->json(['code'=>1, 'msg'=>'Type de moteur mis à jour !']);
         }
 
     }

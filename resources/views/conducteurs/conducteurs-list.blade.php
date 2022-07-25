@@ -77,4 +77,8 @@
         <!-- END Your Block -->
     </div>
     <!-- END Page Content -->
+
+    <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/functions/conducteurs.js') }}"></script>
+
 @endsection

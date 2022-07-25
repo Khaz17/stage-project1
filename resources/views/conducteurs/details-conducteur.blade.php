@@ -7,10 +7,18 @@
 @section('content')
     <!-- Page Content -->
     <div class="content">
+
+        @if (Session::get('success'))
+            <div class="alert alert-success">
+                {{ Session::get('success') }}
+            </div>
+        @endif
+
         <!-- Quick Actions -->
         <div class="row">
             <div class="col-6">
-                <a class="block block-rounded block-link-shadow text-center" href="{{ url('/editConducteur/'.$conducteur->id) }}">
+                <a class="block block-rounded block-link-shadow text-center"
+                    href="{{ url('/editConducteur/' . $conducteur->id) }}">
                     <div class="block-content block-content-full">
                         <div class="fs-2 fw-semibold text-dark">
                             <i class="fa fa-pencil-alt"></i>
@@ -24,7 +32,8 @@
                 </a>
             </div>
             <div class="col-6">
-                <a class="block block-rounded block-link-shadow text-center" href="javascript:void(0)">
+                <a class="block block-rounded block-link-shadow text-center" data-toggle="modal" href="javascript:void(0)"
+                    data-target="#deleteConducteur" data-id="{{$conducteur->id}}" id="deleteConducteurBtn">
                     <div class="block-content block-content-full">
                         <div class="fs-2 fw-semibold text-danger">
                             <i class="fa fa-times"></i>
@@ -36,6 +45,32 @@
                         </p>
                     </div>
                 </a>
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Launch demo modal
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- END Quick Actions -->
@@ -58,7 +93,7 @@
                 <div class="row items-push text-uppercase">
                     <div class="col-6 col-md-3">
                         <div class="fw-semibold text-dark mb-1">ENGAGÉ LE</div>
-                        <a class="link-fx fs-3 text-primary" href="javascript:void(0)">Date</a>
+                        <a class="link-fx fs-3 text-primary" href="javascript:void(0)">{{ $conducteur->created_at }}</a>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="fw-semibold text-dark mb-1">ARGENT RAPPORTÉ</div>
@@ -96,10 +131,12 @@
                                     {{-- Sunrise Str 620<br>
                                     Melbourne<br>
                                     Australia, 11-587<br><br> --}}
-                                    <i class="far fa-calendar-days"></i> Date de naissance : {{ $conducteur->date_naissance_c }}<br>
+                                    <i class="far fa-calendar-days"></i> Date de naissance :
+                                    {{ $conducteur->date_naissance_c }}<br>
                                     <i class="fa fa-location-dot"></i> {{ $conducteur->adresse_c }}<br>
                                     <i class="fa fa-phone"></i> {{ $conducteur->telephone_c }} <br>
-                                    <i class="fa fa-envelope"></i> <a href="javascript:void(0)">{{ $conducteur->email_c }}</a>
+                                    <i class="fa fa-envelope"></i> <a
+                                        href="javascript:void(0)">{{ $conducteur->email_c }}</a>
                                 </address>
                             </div>
                         </div>
@@ -113,13 +150,19 @@
                             </div>
                             <div class="block-content">
                                 <address class="fs-sm">
-                                    Catégorie de permis {{ $conducteur->type_permis }}<br>
-                                    Date de délivrance {{ $conducteur->delivrance_p }}<br>
-                                    Date d'expiration {{ $conducteur->expiration_p}}<br>
-                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#imgScanModal" id="showScan">
+                                    Catégorie de permis : {{ $conducteur->type_permis }}<br>
+                                    Date de délivrance : {{ $conducteur->delivrance_p }}<br>
+                                    Date d'expiration : {{ $conducteur->expiration_p }}<br>
+                                    {{-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#imgScanModal" id="showScan">
                                         Scan du permis
                                     </button>
-                                    <img src="{{ url('/uploads/conducteurs/' . $conducteur->scan_permis) }}" style="display: none" alt="" id="hid">
+                                    <img src="{{ url('/uploads/conducteurs/' . $conducteur->scan_permis) }}" style="display: none" alt="" id="hid"> --}}
+                                    Scan du permis :
+                                    @foreach ($conducteur->scan_permis as $scan)
+                                        <img id="scan-icon" class="scan-icon"
+                                            src="{{ url('/uploads/conducteurs/' . $scan) }}" alt="Snow"
+                                            style="width:10%;max-width:35px">
+                                    @endforeach
 
                                     {{-- Sunrise Str 620<br>
                                     Melbourne<br>
@@ -136,41 +179,9 @@
         </div>
 
         @include('conducteurs.display-scan-modal')
+        @include('conducteurs.delete-conducteur')
         <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
         <script src="{{ asset('js/functions/conducteurs.js') }}"></script>
 
-        <script>
-            var modal = document.getElementById("myModal");
-
-            // Get the image and insert it inside the modal - use its "alt" text as a caption
-            var img = document.getElementById("hid");
-            var shw = document.getElementById("showScan");
-            var modalImg = document.getElementById("img01");
-            var captionText = document.getElementById("caption");
-            shw.onclick = function(){
-                modal.style.display = "block";
-                modalImg.src = img.src;
-                captionText.innerHTML = this.alt;
-            }
-
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
-
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-        </script>
-
-        {{-- <script>
-            function show() {
-                /* Access image by id and change
-                the display property to block*/
-                document.getElementById('imgscan').style.display = "block";
-
-                document.getElementById('showScan').style.display = "none";
-            }
-        </script> --}}
-        <!-- END Addresses -->
     </div>
 @endsection

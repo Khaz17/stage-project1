@@ -51,7 +51,7 @@ Route::post('/save-conducteur', [ConducteurController::class, 'saveConducteur'])
 Route::get('/getConducteursList',[ConducteurController::class, 'getConducteursList'])->name('get.conducteurs.list');
 Route::get('/getConducteurDetails/{id}',[ConducteurController::class, 'getConducteurDetails'])->name('get.conducteur.details');
 Route::post('/updateConducteur',[ConducteurController::class, 'updateConducteur'])->name('update.conducteur.details');
-Route::post('/deleteConducteur',[ConducteurController::class, 'deleteConducteur'])->name('delete.conducteur');
+Route::post('/deleteConducteur/{id}',[ConducteurController::class, 'deleteConducteur'])->name('delete.conducteur');
 
 // Example Routes
 Route::view('/', 'landing');

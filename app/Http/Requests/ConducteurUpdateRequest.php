@@ -7,7 +7,7 @@ use App\Rules\IsAdult;
 use App\Rules\TwoScans;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ConducteurSaveRequest extends FormRequest
+class ConducteurUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,8 +30,8 @@ class ConducteurSaveRequest extends FormRequest
             'nom_c' => 'required|string',
             'prenom_c' => 'required|string',
             'date_naissance_c' => ['required','date', new IsAdult],
-            'telephone_c' => 'required|string|unique:conducteurs',
-            'email_c' => 'email|unique:conducteurs',
+            'telephone_c' => 'required|string|unique:conducteurs,telephone_c,'.$this->cid,
+            'email_c' => 'email|unique:conducteurs,email_c,'.$this->cid,
             'adresse_c' => 'required|string',
             'type_permis' => 'required|not_in:0',
             'delivrance_p' => 'required|date|before_or_equal:today',
@@ -67,4 +67,6 @@ class ConducteurSaveRequest extends FormRequest
             'scan_permis.image' => 'Les fichiers de scan doivent être des images (PNG, JPG, JPEG)'
         ];
     }
+
+
 }
