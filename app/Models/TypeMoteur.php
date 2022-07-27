@@ -10,4 +10,8 @@ class TypeMoteur extends Model
     use HasFactory;
 
     protected $fillable = ['libelle_tm'];
+
+    public function vehicules(){
+        return $this->hasMany(Vehicule::class);
+    }
 }

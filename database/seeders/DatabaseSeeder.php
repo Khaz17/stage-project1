@@ -50,5 +50,22 @@ class DatabaseSeeder extends Seeder
             'cas' => 'Handicapés physiques',
             'age_minimum' => 16,
         ]);
+
+
+        DB::table('usages')->insert([
+            'libelle_u' => 'Taxi',
+        ]);
+
+        DB::table('usages')->insert([
+            'libelle_u' => 'Véhicule de transport en commun',
+        ]);
+
+        DB::table('usages')->insert([
+            'libelle_u' => 'VTC',
+        ]);
+
+        DB::table('usages')->insert([
+            'libelle_u' => 'Véhicule utilitaire',
+        ]);
     }
 }

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ConducteurSaveRequest;
 use App\Http\Requests\ConducteurUpdateRequest;
 use App\Models\Conducteur;
+use Carbon\Carbon;
 use DataTables;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\DB;
 
 class ConducteurController extends Controller
@@ -71,13 +71,10 @@ class ConducteurController extends Controller
 
     }
 
-    public function getConducteursList(){
-
-    }
-
     public function getConducteurDetails($id){
         $conducteur = Conducteur::find($id);
-        $conducteur->created_at = date("d-m-Y", $conducteur->created_at);
+        // $dc = $conducteur->created_at;
+        // $conducteur->created_at = date('d-m-Y', $dc);
         $conducteur->scan_permis = json_decode($conducteur->scan_permis);
         return view('conducteurs.details-conducteur', compact('conducteur'));
     }

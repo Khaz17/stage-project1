@@ -4930,6 +4930,7 @@ var Helpers = /*#__PURE__*/function () {
       jQuery('.js-masked-date-dash:not(.js-masked-enabled)').mask('99-99-9999');
       jQuery('.js-masked-phone:not(.js-masked-enabled)').mask('(999) 999-9999');
       jQuery('.js-masked-phone-tg:not(.js-masked-enabled)').mask('(00228) 99 99 99 99');
+      jQuery('.js-masked-matriculation-tg:not(.js-masked-enabled)').mask('9999 aa');
       jQuery('.js-masked-phone-ext:not(.js-masked-enabled)').mask('(999) 999-9999? x99999');
       jQuery('.js-masked-taxid:not(.js-masked-enabled)').mask('99-9999999');
       jQuery('.js-masked-ssn:not(.js-masked-enabled)').mask('999-99-9999');

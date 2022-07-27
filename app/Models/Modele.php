@@ -17,4 +17,8 @@ class Modele extends Model
     public function marque(){
         return $this->belongsTo(Marque::class);
     }
+
+    public function vehicules(){
+        return $this->hasMany(Vehicule::class);
+    }
 }
