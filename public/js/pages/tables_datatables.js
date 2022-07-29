@@ -61,7 +61,39 @@ var pageTablesDatatables = /*#__PURE__*/function () {
       jQuery('.js-dataTable-full').dataTable({
         pageLength: 5,
         lengthMenu: [[5, 10, 15, 20], [5, 10, 15, 20]],
-        autoWidth: false
+        autoWidth: false,
+        "order": [
+            [0, "asc"]
+        ],
+        //dom: 'Bfrtip',
+        "language": {
+            "sSearch": "Rechercher",
+            "oPaginate": {
+                "sFirst": "Premier",
+                "sLast": "Dernier",
+                "sNext": "Suivant",
+                "sPrevious": "Précédent"
+            },
+            "sInfo": "Afficher _START_ à _END_ des _TOTAL_ lignes",
+            "sInfoEmpty": "Afficher 0 à 0 des 0 données",
+            "sInfoFiltered": "Trié de _MAX_ lignes totales",
+            "sEmptyTable": "Pas de données disponible dans la table",
+            "sLengthMenu": "Afficher _MENU_ lignes",
+            "sZeroRecords": "Aucune donnée correspondante trouvée",
+            "sProcessing": "Traitement en cours ...",
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            },
+            "select": {
+                "rows": {
+                    "_": "%d lignes sélectionnées",
+                    "0": "Aucune ligne sélectionnée",
+                    "1": "1 ligne sélectionnée"
+                }
+            }
+        }
+
       }); // Init DataTable with Buttons
 
       jQuery('.js-dataTable-buttons').dataTable({

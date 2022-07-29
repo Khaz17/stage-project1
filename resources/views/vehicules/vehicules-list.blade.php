@@ -7,7 +7,7 @@
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
                 <div class="flex-grow-1">
                     <h1 class="h3 fw-bold mb-2">
-                        Liste des conducteurs
+                        Liste des véhicules
                     </h1>
                     {{-- <h2 class="fs-base lh-base fw-medium text-muted mb-0">
                         Subtitle
@@ -19,7 +19,7 @@
                             <a class="link-fx" href="javascript:void(0)">App</a>
                         </li>
                         <li class="breadcrumb-item" aria-current="page">
-                            Liste des conducteurs
+                            Liste des véhicules
                         </li>
                     </ol>
                 </nav>
@@ -27,18 +27,6 @@
         </div>
     </div>
     <!-- END Hero -->
-
-    @if (Session::get('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success')}}
-        </div>
-    @endif
-
-    @if (Session::get('fail'))
-        <div class="alert alert-danger">
-            {{ Session::get('fail')}}
-        </div>
-    @endif
 
     <!-- Page Content -->
     <div class="content">
@@ -50,28 +38,30 @@
                 </h3>
             </div>
             <div class="block-content">
-                <div id="conducteurs-table" class="p-2">
+                <div id="vehicules-table" class="p-2">
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nom</th>
-                                <th>Prénoms</th>
-                                <th>Type de permis</th>
+                                <th>Numéro de châssis</th>
+                                <th>Numéro d'immatriculation</th>
+                                <th>Modèle</th>
+                                <th>Marque</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($conducteurs as $conducteur)
+                            @foreach ($vehicules as $vehicule)
                                 <tr>
-                                    <td>{{ $conducteur->id }}</td>
-                                    <td>{{ $conducteur->nom_c }}</td>
-                                    <td>{{ $conducteur->prenom_c }}</td>
-                                    <td>{{ $conducteur->type_permis }}</td>
+                                    <td>{{ $vehicule->id }}</td>
+                                    <td>{{ $vehicule->numero_chassis }}</td>
+                                    <td>{{ $vehicule->immatriculation }}</td>
+                                    <td>{{ $vehicule->libelle_m }}</td>
+                                    <td>{{ $vehicule->nom_m }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a type="button" class="btn btn-sm btn-alt-success" href="{{ url('/getConducteurDetails/'.$conducteur->id) }}" id="showConducteurDetails" data-bs-toggle="tooltip" title="Afficher détails conducteur"><i class="far fa-fw fa-eye"></i></a>
-                                            <button type="button" class="btn btn-sm btn-alt-danger" data-id="{{ $conducteur->id }}" id="deleteConducteurBtn" data-bs-toggle="tooltip" title="Supprimer conducteur">
+                                            <a type="button" class="btn btn-sm btn-alt-success" href="{{ url('/getVehiculeDetails/'.$vehicule->id) }}" id="showVehiculeDetails" data-bs-toggle="tooltip" title="Afficher détails véhicule"><i class="far fa-fw fa-eye"></i></a>
+                                            <button type="button" class="btn btn-sm btn-alt-danger" data-id="{{ $vehicule->id }}" id="deleteVehiculeBtn" data-bs-toggle="tooltip" title="Supprimer véhicule">
                                             <i class="fa fa-fw fa-times"></i>
                                             </button>
                                         </div>
@@ -91,6 +81,6 @@
     <!-- END Page Content -->
 
     <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/functions/conducteurs.js') }}"></script>
+    <script src="{{ asset('js/functions/vehicules.js') }}"></script>
 
 @endsection

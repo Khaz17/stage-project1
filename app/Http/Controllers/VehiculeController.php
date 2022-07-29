@@ -66,7 +66,14 @@ class VehiculeController extends Controller
             ->join('type_moteurs','vehicules.type_moteur_id','=','type_moteurs.id')
             ->where('vehicules.id',$id)
             ->get(['vehicules.*','modeles.libelle_m','marques.nom_m','usages.libelle_u','type_moteurs.libelle_tm']);
-        return view('vehicules.details-vehicule', compact('vehicule'));
+
+        $conducteur = Vehicule::join('affectations','vehicules.id','=','affectations.vehicule_id')
+            ->join('conducteurs','affectations.conducteur_id','=','conducteurs.id')
+            ->latest('affectations.date_realisation')
+            ->where('vehicules.id',$id)
+            ->where('affectations.date_fin',null)
+            ->get(['affectations.conducteur_id','conducteurs.nom_c','conducteurs.prenom_c']);
+        return view('vehicules.details-vehicule', compact('vehicule','conducteur'));
     }
 
     public function showEditPage($id){

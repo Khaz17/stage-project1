@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('js/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/plugins/flatpickr/flatpickr.min.css') }}">
     <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
     <!-- <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/amethyst.css') }}"> -->
     @yield('css_after')
@@ -264,12 +265,27 @@
                                 <span class="nav-main-link-name">Dashboard</span>
                             </a>
                         </li>
-                        <li class="nav-main-heading">Voitures</li>
-                        <li class="nav-main-item open">
-                            <a class="nav-main-link" href="/">
+                        <li class="nav-main-heading">Acquisitions</li>
+                        <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
+                                aria-expanded="true" href="#">
                                 <i class="nav-main-link-icon fa fa-car"></i>
-                                <span class="nav-main-link-name">Liste</span>
+                                <span class="nav-main-link-name">Véhicules</span>
                             </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('vehicules/vehicules.list') ? ' active' : '' }}"
+                                        href="{{ route('vehicules.list') }}">
+                                        <span class="nav-main-link-name">Liste</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('modeles/newVehicule') ? ' active' : '' }}"
+                                        href="{{ route('new.vehicule') }}">
+                                        <span class="nav-main-link-name">Ajout de véhicule</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
@@ -315,6 +331,28 @@
                                     <a class="nav-main-link{{ request()->is('/') ? ' active' : '' }}"
                                         href="{{ route('new.conducteur') }}">
                                         <span class="nav-main-link-name">Ajouter un nouveau conducteur</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-main-heading">Actions</li>
+                        <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
+                                aria-expanded="true" href="#">
+                                <i class="nav-main-link-icon fa fa-arrows-left-right"></i>
+                                <span class="nav-main-link-name">Affectations</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('affectations/affectations.list') ? ' active' : '' }}"
+                                        href="{{ route('affectations.list') }}">
+                                        <span class="nav-main-link-name">Liste</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('affectations/newAffectation') ? ' active' : '' }}"
+                                        href="{{ route('new.affectation') }}">
+                                        <span class="nav-main-link-name">Nouvelle affectation</span>
                                     </a>
                                 </li>
                             </ul>
@@ -630,17 +668,14 @@
     <script src="{{ asset('js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('js/plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
     <script src="{{ asset('js/plugins/inputmask/jquery.inputmask.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+
     <!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Maxlength + Select2 + Masked Inputs + Ion Range Slider + BS Colorpicker plugins) -->
     <script>
-        One.helpersOnLoad(['jq-datepicker', 'jq-maxlength', 'jq-select2', 'jq-masked-inputs', 'jq-rangeslider', 'jq-colorpicker']);
+        // One.helpersOnLoad(['', 'jq-datepicker', 'jq-maxlength', 'jq-select2', 'jq-masked-inputs', 'jq-rangeslider', 'jq-colorpicker']);
+        One.helpersOnLoad(['js-flatpickr', 'jq-datepicker', 'jq-maxlength', 'jq-select2', 'jq-masked-inputs', 'jq-rangeslider', 'jq-colorpicker']);
     </script>
-
-    {{-- <script>
-        $(document).ready(function(){
-            $("example-masked-phone").inputmask("(00999)-99-99-99-99")
-        });
-    </script> --}}
-
 
     <script>
         toastr.options.preventDuplicates = true;

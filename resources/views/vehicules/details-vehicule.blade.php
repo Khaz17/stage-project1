@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-6">
                 <a class="block block-rounded block-link-shadow text-center"
-                    href="{{ url('/editConducteur/' . $conducteur->id) }}">
+                    href="{{ url('/editVehicule/' . $vehicule[0]->id) }}">
                     <div class="block-content block-content-full">
                         <div class="fs-2 fw-semibold text-dark">
                             <i class="fa fa-pencil-alt"></i>
@@ -26,14 +26,14 @@
                     </div>
                     <div class="block-content py-2 bg-body-light">
                         <p class="fw-medium fs-sm text-muted mb-0">
-                            Modifier conducteur
+                            Modifier véhicule
                         </p>
                     </div>
                 </a>
             </div>
             <div class="col-6">
                 <a class="block block-rounded block-link-shadow text-center" data-toggle="modal" href="javascript:void(0)"
-                    data-target="#deleteConducteur" data-id="{{$conducteur->id}}" id="deleteConducteurBtn">
+                    data-target="#deleteVehicule" data-id="{{$vehicule[0]->id}}" id="deleteVehiculeBtn">
                     <div class="block-content block-content-full">
                         <div class="fs-2 fw-semibold text-danger">
                             <i class="fa fa-times"></i>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="block-content py-2 bg-body-light">
                         <p class="fw-medium fs-sm text-danger mb-0">
-                            Supprimer conducteur
+                            Supprimer véhicule
                         </p>
                     </div>
                 </a>
@@ -56,35 +56,35 @@
                     {{-- <div class="mb-3">
                         <img class="img-avatar" src="assets/media/avatars/avatar13.jpg" alt="">
                     </div> --}}
-                    <p class="fs-sm fw-medium text-muted mb-3">Conducteur #{{ $conducteur->id }}</p>
+                    <p class="fs-sm fw-medium text-muted mb-3">Véhicule #{{ $vehicule[0]->id }}</p>
                     <h1 class="fs-lg mb-0">
-                        <span>{{ $conducteur->nom_c }} {{ $conducteur->prenom_c }}</span>
+                        <span>{{ $vehicule[0]->immatriculation }}</span>
                     </h1>
-                    <p class="fs-sm fw-medium text-muted">Permis de catégorie {{ $conducteur->type_permis }}</p>
+                    <p class="fs-sm fw-medium text-muted">{{ $vehicule[0]->nom_m }} {{ $vehicule[0]->libelle_m }}</p>
                 </div>
             </div>
             <div class="block-content bg-body-light text-center">
                 <div class="row items-push text-uppercase">
                     <div class="col-6 col-md-3">
-                        <div class="fw-semibold text-dark mb-1">ENGAGÉ LE</div>
-                        <a class="link-fx fs-3 text-primary" href="javascript:void(0)">{{ date('d/m/Y H:i', strtotime($conducteur->created_at)) }}</a>
+                        <div class="fw-semibold text-dark mb-1">ACQUIS LE</div>
+                        <a class="link-fx fs-3 text-primary" href="javascript:void(0)">{{ date('d/m/Y', strtotime($vehicule[0]->date_acquisition)) }}</a>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="fw-semibold text-dark mb-1">ARGENT RAPPORTÉ</div>
                         <a class="link-fx fs-3 text-primary" href="javascript:void(0)">$3.580,00</a>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="fw-semibold text-dark mb-1">Disponibilité</div>
-                        <a class="link-fx fs-3 text-primary" href="javascript:void(0)">ACTIF / INACTIF</a>
+                        <div class="fw-semibold text-dark mb-1">Usage</div>
+                        <a class="link-fx fs-3 text-primary" href="javascript:void(0)">{{ $vehicule[0]->libelle_u }}</a>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="fw-semibold text-dark mb-1">Affecté à</div>
-                    @if (count($vehicule) === 0)
-                        Non affecté {{-- <a class="link-fx fs-3 text-primary" href="{{ route('get.vehicule.details',['id'=>$vehicule[0]->vehicule_id]) }}">{{ $vehicule[0]->immatriculation}}</a> --}}
+                    @if (count($conducteur) === 0)
+                        Non affecté
                     @else
-                        <a class="link-fx fs-3 text-primary" href="{{ route('get.vehicule.details',['id'=>$vehicule[0]->vehicule_id]) }}">{{ $vehicule[0]->immatriculation}}</a>
+                        <a class="link-fx fs-3 text-primary" href="{{ route('get.conducteur.details',['id'=>$conducteur[0]->conducteur_id]) }}">{{ $conducteur[0]->nom_c}} {{ $conducteur[0]->prenom_c}}</a>
                     @endif
-                        {{-- <a class="link-fx fs-3 text-primary" href="{{ route('get.vehicule.details',['id'=>$vehicule[0]->vehicule_id]) }}">{{ $vehicule[0]->immatriculation}}</a> --}}
+                        {{-- <a class="link-fx fs-3 text-primary" href="{{ route('get.conducteur.details',['id'=>$vehicule[0]->conducteur_id]) }}">{{ $vehicule[0]->nom_c }} {{ $vehicule[0]->prenom_c }}</a> --}}
                     </div>
                 </div>
             </div>
@@ -102,20 +102,15 @@
                         <!-- Billing Address -->
                         <div class="block block-rounded block-bordered">
                             <div class="block-header border-bottom">
-                                <h3 class="block-title">En savoir plus</h3>
+                                <h3 class="block-title">USINE</h3>
                             </div>
                             <div class="block-content">
                                 {{-- <div class="fs-4 mb-1">John Parker</div> --}}
                                 <address class="fs-sm">
-                                    {{-- Sunrise Str 620<br>
-                                    Melbourne<br>
-                                    Australia, 11-587<br><br> --}}
-                                    <i class="far fa-calendar-days"></i> Date de naissance :
-                                    {{ date('d/m/Y', strtotime($conducteur->date_naissance_c)) }}<br>
-                                    <i class="fa fa-location-dot"></i> {{ $conducteur->adresse_c }}<br>
-                                    <i class="fa fa-phone"></i> {{ $conducteur->telephone_c }} <br>
-                                    <i class="fa fa-envelope"></i> <a
-                                        href="mailto:{{ $conducteur->email_c }}">{{ $conducteur->email_c }}</a>
+                                    Numéro de châssis : {{ $vehicule[0]->numero_chassis }}<br>
+                                    Type de moteur : {{ $vehicule[0]->libelle_tm }}<br>
+                                    Modèle : {{ $vehicule[0]->libelle_m }} ({{ $vehicule[0]->nom_m }}) <br>
+                                    Nombre de places : {{ $vehicule[0]->nbre_places }}</a>
                                 </address>
                             </div>
                         </div>
@@ -125,29 +120,14 @@
                         <!-- Shipping Address -->
                         <div class="block block-rounded block-bordered">
                             <div class="block-header border-bottom">
-                                <h3 class="block-title">Permis de conduire</h3>
+                                <h3 class="block-title">UTILISATION</h3>
                             </div>
                             <div class="block-content">
                                 <address class="fs-sm">
-                                    Catégorie de permis : {{ $conducteur->type_permis }}<br>
-                                    Date de délivrance : {{ date('d/m/Y', strtotime($conducteur->delivrance_p)) }}<br>
-                                    Date d'expiration : {{ date('d/m/Y', strtotime($conducteur->expiration_p)) }}<br>
-                                    {{-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#imgScanModal" id="showScan">
-                                        Scan du permis
-                                    </button>
-                                    <img src="{{ url('/uploads/conducteurs/' . $conducteur->scan_permis) }}" style="display: none" alt="" id="hid"> --}}
-                                    Scan du permis :
-                                    @foreach ($conducteur->scan_permis as $scan)
-                                        <img id="scan-icon" class="scan-icon"
-                                            src="{{ url('/uploads/conducteurs/' . $scan) }}" alt="Snow"
-                                            style="width:10%;max-width:35px">
-                                    @endforeach
-
-                                    {{-- Sunrise Str 620<br>
-                                    Melbourne<br>
-                                    Australia, 11-587<br><br>
-                                    <i class="fa fa-phone"></i> (999) 888-55555<br>
-                                    <i class="fa fa-envelope-o"></i> <a href="javascript:void(0)">company@example.com</a> --}}
+                                    Date d'acquisition : {{ date('d/m/Y', strtotime($vehicule[0]->date_acquisition)) }}<br>
+                                    Prix d'acquisition : {{ number_format($vehicule[0]->prix_acquisition, 2, ',', ' ') }} FCFA<br>
+                                    Consommation de base : {{ $vehicule[0]->consommation_de_base }} l/km<br>
+                                    Recette hebdomadaire attendue : {{ number_format($vehicule[0]->recette_hebdo_attendue, 2, ',', ' ') }} FCFA
                                 </address>
                             </div>
                         </div>
@@ -157,9 +137,8 @@
             </div>
         </div>
 
-        @include('conducteurs.display-scan-modal')
         <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
-        <script src="{{ asset('js/functions/conducteurs.js') }}"></script>
+        <script src="{{ asset('js/functions/vehicules.js') }}"></script>
 
     </div>
 @endsection

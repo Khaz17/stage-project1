@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ConducteurSaveRequest;
 use App\Http\Requests\ConducteurUpdateRequest;
+use App\Models\Affectation;
 use App\Models\Conducteur;
 use Carbon\Carbon;
 use DataTables;
@@ -73,10 +74,28 @@ class ConducteurController extends Controller
 
     public function getConducteurDetails($id){
         $conducteur = Conducteur::find($id);
-        // $dc = $conducteur->created_at;
-        // $conducteur->created_at = date('d-m-Y', $dc);
+        // $conducteur = Conducteur::join('affectations','conducteurs.id','=','affectations.conducteur_id')
+        //                         ->join('vehicules','affectations.vehicule_id','=','vehicules.id')
+        //                         ->where('conducteurs.id',$id)
+        //                         ->latest('affectations.date_realisation')
+        //                         ->where('affectations.date_fin',null)
+        //                         ->get(['conducteurs.*','affectations.vehicule_id','vehicules.immatriculation']);
+
+        // $conducteur = Conducteur::join('affectations','conducteurs.id','=','affectations.conducteur_id')
+        //                         ->where('conducteurs.id',$id)
+        //                         ->get(['conducteurs.*']);
+
+        $vehicule = Conducteur::join('affectations','conducteurs.id','=','affectations.conducteur_id')
+                                ->join('vehicules','affectations.vehicule_id','=','vehicules.id')
+                                ->latest('affectations.date_realisation')
+                                ->where('conducteurs.id',$conducteur->id)
+                                ->where('affectations.date_fin',null)
+                                ->get(['affectations.vehicule_id','vehicules.immatriculation']);
+
+        // $conducteur[0]->scan_permis = json_decode($conducteur[0]->scan_permis);
         $conducteur->scan_permis = json_decode($conducteur->scan_permis);
-        return view('conducteurs.details-conducteur', compact('conducteur'));
+        return view('conducteurs.details-conducteur', compact('conducteur','vehicule'));
+        // return view('conducteurs.test', compact('conducteur','vehicule'));
     }
 
     public function showEditPage($id){
@@ -137,19 +156,29 @@ class ConducteurController extends Controller
     }
 
     public function deleteConducteur($id){
-        $conducteur = Conducteur::find($id);
-        $query = $conducteur->delete();
+        $affected = Affectation::where('conducteur_id', $id)
+                        ->whereNull('date_fin')
+                        ->count();
+
+        if ($affected == 1) {
+            return back()->with('fail',"Le conducteur est affecté à un véhicule. Veuillez désactiver l'affectation avant de supprimer le conducteur");
+        } else if ($affected == 0) {
+            $conducteur = Conducteur::find($id);
+            $query = $conducteur->delete();
+        }
 
         if(!$query){
             return back()->with('fail',"Quelque chose s'est mal passé");
         } else {
             return redirect()->route('conducteurs.list', ['success' => 'Le conducteur a été supprimé']);
-            // return back()->with('success', 'Le conducteur a été supprimé');
         }
-        // if(!$query){
-        //     return response()->json(['code'=>0, 'msg'=>"Oups ! Quelque chose s'est mal passé"]);
+
+        // if (!$query) {
+        //     return back()->with('fail',"Quelque chose s'est mal passé !");
         // } else {
-        //     return response()->json(['code'=>1, 'msg'=>'Marque supprimée !']);
+        //     return back()->with('success',"L'affectation a été réalisée avec succès !");
         // }
+
+
     }
 }

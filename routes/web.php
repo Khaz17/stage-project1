@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TypeMoteursController;
 use App\Http\Controllers\MarqueController;
 use App\Http\Controllers\ModeleController;
+use App\Http\Controllers\VehiculeController;
+use App\Http\Controllers\AffectationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,12 +48,27 @@ Route::post('/deleteModele',[ModeleController::class, 'deleteModele'])->name('de
 Route::get('/conducteurs-list',[ConducteurController::class, 'index'])->name('conducteurs.list');
 Route::get('/newConducteur',[ConducteurController::class, 'showAddPage'])->name('new.conducteur');
 Route::get('/editConducteur/{id}',[ConducteurController::class, 'showEditPage'])->name('edit.conducteur');
-
 Route::post('/save-conducteur', [ConducteurController::class, 'saveConducteur'])->name('save.conducteur');
-Route::get('/getConducteursList',[ConducteurController::class, 'getConducteursList'])->name('get.conducteurs.list');
 Route::get('/getConducteurDetails/{id}',[ConducteurController::class, 'getConducteurDetails'])->name('get.conducteur.details');
 Route::post('/updateConducteur',[ConducteurController::class, 'updateConducteur'])->name('update.conducteur.details');
 Route::post('/deleteConducteur/{id}',[ConducteurController::class, 'deleteConducteur'])->name('delete.conducteur');
+
+Route::get('/vehicules-list',[VehiculeController::class, 'index'])->name('vehicules.list');
+Route::get('/newVehicule',[VehiculeController::class, 'showAddPage'])->name('new.vehicule');
+Route::get('/editVehicule/{id}',[VehiculeController::class, 'showEditPage'])->name('edit.vehicule');
+Route::post('/save-vehicule', [VehiculeController::class, 'saveVehicule'])->name('save.vehicule');
+Route::get('/getVehiculeDetails/{id}',[VehiculeController::class, 'getVehiculeDetails'])->name('get.vehicule.details');
+Route::post('/updateVehicule',[VehiculeController::class, 'updateVehicule'])->name('update.vehicule.details');
+Route::post('/deleteVehicule/{id}',[VehiculeController::class, 'deleteVehicule'])->name('delete.vehicule');
+
+Route::get('/affectations-list',[AffectationController::class, 'index'])->name('affectations.list');
+Route::get('/newAffectation',[AffectationController::class, 'showAddPage'])->name('new.affectation');
+Route::get('/editAffectation/{id}',[AffectationController::class, 'showEditPage'])->name('edit.affectation');
+Route::post('/save-affectation', [AffectationController::class, 'saveAffectation'])->name('save.affectation');
+Route::get('/getAffectationDetails/{id}',[AffectationController::class, 'getAffectationDetails'])->name('get.affectation.details');
+Route::post('/updateAffectation',[AffectationController::class, 'updateAffectation'])->name('update.affectation.details');
+// Route::post('/deleteAffectation/{id}',[AffectationController::class, 'deleteAffectation'])->name('delete.affectation');
+Route::post('/disableAffectation/{id}',[AffectationController::class, 'disableAffectation'])->name('disable.affectation');
 
 // Example Routes
 Route::view('/', 'landing');
