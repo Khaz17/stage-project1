@@ -7,6 +7,7 @@ use App\Http\Controllers\MarqueController;
 use App\Http\Controllers\ModeleController;
 use App\Http\Controllers\VehiculeController;
 use App\Http\Controllers\AffectationController;
+use App\Http\Controllers\BilanJournalierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,8 +68,17 @@ Route::get('/editAffectation/{id}',[AffectationController::class, 'showEditPage'
 Route::post('/save-affectation', [AffectationController::class, 'saveAffectation'])->name('save.affectation');
 Route::get('/getAffectationDetails/{id}',[AffectationController::class, 'getAffectationDetails'])->name('get.affectation.details');
 Route::post('/updateAffectation',[AffectationController::class, 'updateAffectation'])->name('update.affectation.details');
-// Route::post('/deleteAffectation/{id}',[AffectationController::class, 'deleteAffectation'])->name('delete.affectation');
 Route::post('/disableAffectation/{id}',[AffectationController::class, 'disableAffectation'])->name('disable.affectation');
+
+
+Route::get('/bilansjournaliers-list',[BilanJournalierController::class, 'index'])->name('bilansjournaliers.list');
+Route::get('/newBilanjournalier',[BilanJournalierController::class, 'showAddPage'])->name('new.bilanjournalier');
+Route::get('/editBilanjournalier/{id}',[BilanJournalierController::class, 'showEditPage'])->name('edit.bilanjournalier');
+Route::post('/save-bilanjournalier', [BilanJournalierController::class, 'saveBilanjournalier'])->name('save.bilanjournalier');
+Route::get('/getBilanJournalierDetails/{id}',[BilanJournalierController::class, 'getBilanjournalierDetails'])->name('get.bilanjournalier.details');
+Route::post('/updateBilanjournalier',[BilanJournalierController::class, 'updateBilanjournalier'])->name('update.bilanjournalier.details');
+Route::post('/deleteBilanjournalier/{id}',[BilanJournalierController::class, 'deleteBilanjournalier'])->name('delete.bilanjournalier');
+
 
 // Example Routes
 Route::view('/', 'landing');

@@ -58,8 +58,7 @@ class ConducteurController extends Controller
             if ($upload) {
 
                 if ($query) {
-                    return redirect()->route('get.conducteur.details', ['id' => $conducteur->id, 'success' => 'Le nouveau conducteur a été enregistré']);
-                    // return back()->with('success','Le nouveau conducteur a été enregistré');
+                    return redirect()->route('get.conducteur.details', ['id' => $conducteur->id])->with('success', 'Le nouveau conducteur a été enregistré');
                 } else {
                     return back()->with('fail',"Quelque chose s'est mal passé");
                 }
@@ -74,16 +73,6 @@ class ConducteurController extends Controller
 
     public function getConducteurDetails($id){
         $conducteur = Conducteur::find($id);
-        // $conducteur = Conducteur::join('affectations','conducteurs.id','=','affectations.conducteur_id')
-        //                         ->join('vehicules','affectations.vehicule_id','=','vehicules.id')
-        //                         ->where('conducteurs.id',$id)
-        //                         ->latest('affectations.date_realisation')
-        //                         ->where('affectations.date_fin',null)
-        //                         ->get(['conducteurs.*','affectations.vehicule_id','vehicules.immatriculation']);
-
-        // $conducteur = Conducteur::join('affectations','conducteurs.id','=','affectations.conducteur_id')
-        //                         ->where('conducteurs.id',$id)
-        //                         ->get(['conducteurs.*']);
 
         $vehicule = Conducteur::join('affectations','conducteurs.id','=','affectations.conducteur_id')
                                 ->join('vehicules','affectations.vehicule_id','=','vehicules.id')
@@ -92,7 +81,6 @@ class ConducteurController extends Controller
                                 ->where('affectations.date_fin',null)
                                 ->get(['affectations.vehicule_id','vehicules.immatriculation']);
 
-        // $conducteur[0]->scan_permis = json_decode($conducteur[0]->scan_permis);
         $conducteur->scan_permis = json_decode($conducteur->scan_permis);
         return view('conducteurs.details-conducteur', compact('conducteur','vehicule'));
         // return view('conducteurs.test', compact('conducteur','vehicule'));
@@ -161,7 +149,7 @@ class ConducteurController extends Controller
                         ->count();
 
         if ($affected == 1) {
-            return back()->with('fail',"Le conducteur est affecté à un véhicule. Veuillez désactiver l'affectation avant de supprimer le conducteur");
+            return back()->with('forbid',"Le conducteur est affecté à un véhicule. Veuillez désactiver l'affectation avant de supprimer le conducteur");
         } else if ($affected == 0) {
             $conducteur = Conducteur::find($id);
             $query = $conducteur->delete();
@@ -170,7 +158,9 @@ class ConducteurController extends Controller
         if(!$query){
             return back()->with('fail',"Quelque chose s'est mal passé");
         } else {
-            return redirect()->route('conducteurs.list', ['success' => 'Le conducteur a été supprimé']);
+            return redirect()->route('conducteurs.list')->with('success', 'Le conducteur a été supprimé');
+            // return redirect()->route('users.index')->with('success', 'User Deleted successfully.');
+
         }
 
         // if (!$query) {

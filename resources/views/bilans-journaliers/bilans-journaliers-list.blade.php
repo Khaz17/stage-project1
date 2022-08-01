@@ -1,14 +1,26 @@
-@extends('layouts.listing')
+@extends('layouts.backend')
 
 @section('content')
+
+    @if (Session::get('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success')}}
+    </div>
+    @endif
+
+    @if (Session::get('fail'))
+    <div class="alert alert-danger">
+        {{ Session::get('fail')}}
+    </div>
+    @endif
+
     <!-- Hero -->
     <div class="bg-body-light">
         <div class="content content-full">
-
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
                 <div class="flex-grow-1">
                     <h1 class="h3 fw-bold mb-2">
-                        Liste des conducteurs
+                        Liste des bilans journaliers
                     </h1>
                     {{-- <h2 class="fs-base lh-base fw-medium text-muted mb-0">
                         Subtitle
@@ -20,7 +32,7 @@
                             <a class="link-fx" href="javascript:void(0)">App</a>
                         </li>
                         <li class="breadcrumb-item" aria-current="page">
-                            Liste des conducteurs
+                            Liste des bilans journaliers
                         </li>
                     </ol>
                 </nav>
@@ -29,64 +41,43 @@
     </div>
     <!-- END Hero -->
 
-
-    @if (Session::get('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success')}}
-        </div>
-    @endif
-
-    @if (Session::get('fail'))
-        <div class="alert alert-danger">
-            {{ Session::get('fail')}}
-        </div>
-    @endif
-
-    @if (Session::get('forbid'))
-        <div class="alert alert-danger">
-            {{ Session::get('forbid')}}
-        </div>
-    @endif
-
-
     <!-- Page Content -->
     <div class="content">
         <!-- Your Block -->
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <h3 class="block-title">
-                    INFORMATIONS GÉNÉRALES
+                    BILANS DE LA JOURNÉE
                 </h3>
             </div>
             <div class="block-content">
-                <div id="conducteurs-table" class="p-2">
-                    <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
+                <div id="affectations-table" class="p-2">
+                    <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nom</th>
-                                <th>Prénoms</th>
-                                <th>Type de permis</th>
+                                <th>Véhicule concerné</th>
+                                <th>Conducteur</th>
+                                <th>Date de réalisation</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($conducteurs as $conducteur)
+                            {{-- @foreach ($affectations as $affectation)
                                 <tr>
-                                    <td>{{ $conducteur->id }}</td>
-                                    <td>{{ $conducteur->nom_c }}</td>
-                                    <td>{{ $conducteur->prenom_c }}</td>
-                                    <td>{{ $conducteur->type_permis }}</td>
+                                    <td>{{ $affectation->id }}</td>
+                                    <td><a href="{{ route('get.vehicule.details',['id'=>$affectation->vehicule_id]) }}">{{ $affectation->immatriculation }}</a></td>
+                                    <td><a href="{{ route('get.conducteur.details',['id'=>$affectation->conducteur_id]) }}">{{ $affectation->nom_c }} {{ $affectation->prenom_c }}</a></td>
+                                    <td>{{ date('d/m/Y H:i', strtotime($affectation->date_realisation)) }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a type="button" class="btn btn-sm btn-alt-success" href="{{ url('/getConducteurDetails/'.$conducteur->id) }}" id="showConducteurDetails" data-bs-toggle="tooltip" title="Afficher détails conducteur"><i class="far fa-fw fa-eye"></i></a>
-                                            <button type="button" class="btn btn-sm btn-alt-danger" data-id="{{ $conducteur->id }}" id="deleteConducteurBtn" data-bs-toggle="tooltip" title="Supprimer conducteur">
-                                            <i class="fa fa-fw fa-times"></i>
+                                            <button type="button" class="btn btn-sm btn-alt-danger" data-id="{{ $affectation->id }}" id="disableAffectationBtn" data-bs-toggle="tooltip" title="Désactiver affectation">
+                                                <i class="fa fa-fw fa-toggle-off"></i>
                                             </button>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
 
 
                         </tbody>
@@ -96,10 +87,8 @@
             </div>
         </div>
         <!-- END Your Block -->
-    </div>
-    <!-- END Page Content -->
 
     <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/functions/conducteurs.js') }}"></script>
+    <script src="{{ asset('js/functions/bilansjournaliers.js') }}"></script>
 
 @endsection

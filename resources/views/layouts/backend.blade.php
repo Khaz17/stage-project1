@@ -357,6 +357,27 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
+                                aria-expanded="true" href="#">
+                                <i class="nav-main-link-icon fa fa-calendar-day"></i>
+                                <span class="nav-main-link-name">Bilans journaliers</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('bilans-journaliers/bilansjournaliers.list') ? ' active' : '' }}"
+                                        href="{{ route('bilansjournaliers.list') }}">
+                                        <span class="nav-main-link-name">Liste</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('bilans-journaliers/newBilanjournalier') ? ' active' : '' }}"
+                                        href="{{ route('new.bilanjournalier') }}">
+                                        <span class="nav-main-link-name">Nouveau bilan</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-main-heading">Various</li>
                         <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"

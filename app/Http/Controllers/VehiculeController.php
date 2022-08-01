@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\VehiculeSaveRequest;
 use App\Http\Requests\VehiculeUpdateRequest;
+use App\Models\Affectation;
 use App\Models\Modele;
 use App\Models\TypeMoteur;
 use App\Models\Vehicule;
@@ -52,7 +53,7 @@ class VehiculeController extends Controller
         $query = $vehicule->save();
 
         if ($query) {
-            return redirect()->route('get.vehicule.details', ['id' => $vehicule->id]);
+            return redirect()->route('get.vehicule.details', ['id' => $vehicule->id])->with('success','Le véhicule a bien été enregistré !');
         } else {
             return back()->with('fail',"Quelque chose s'est mal passé");
         }
@@ -108,13 +109,21 @@ class VehiculeController extends Controller
     }
 
     public function deleteVehicule($id){
-        $vehicule = Vehicule::find($id);
-        $query = $vehicule->delete();
+        $affected = Affectation::where('vehicule_id', $id)
+                        ->whereNull('date_fin')
+                        ->count();
 
-        if (!$query) {
-            return back()->with('fail',"Quelque chose s'est mal passé");
+        if ($affected == 0) {
+            $vehicule = Vehicule::find($id);
+            $query = $vehicule->delete();
+            if (!$query) {
+                return back()->with('fail',"Quelque chose s'est mal passé");
+            } else {
+                return back()->with('success',"Le véhicule a été supprimé");
+            }
         } else {
-            return back()->with('success',"Le véhicule a été supprimé");
+            return back()->with('fail',"Le véhicule est affecté à un conducteur. Veuillez désactiver l'affectation avant de supprimer le véhicule");
+            // return redirect()->route('users.index')->with('success', 'User Deleted successfully.');
         }
 
     }

@@ -14,6 +14,12 @@
             </div>
         @endif
 
+        @if (Session::get('fail'))
+            <div class="alert alert-success">
+                {{ Session::get('fail') }}
+            </div>
+        @endif
+
         <!-- Quick Actions -->
         <div class="row">
             <div class="col-6">

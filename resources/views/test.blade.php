@@ -2,8 +2,8 @@
 
 @section('content')
 
-    {{ $conducteur }}
+    {{-- {{ $conducteur }} --}}
 
-    {{ $vehicule }}
+    {{ $vehicules }}
 
 @endsection
