@@ -26,6 +26,7 @@ class CreateConducteursTable extends Migration
             $table->date('expiration_p');
             $table->string('scan_permis')->nullable(true);
             $table->timestamps();
+            $table->unique(['nom_c', 'prenom_c']);
         });
     }
 

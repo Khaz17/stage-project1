@@ -59,6 +59,8 @@ Route::get('/newVehicule',[VehiculeController::class, 'showAddPage'])->name('new
 Route::get('/editVehicule/{id}',[VehiculeController::class, 'showEditPage'])->name('edit.vehicule');
 Route::post('/save-vehicule', [VehiculeController::class, 'saveVehicule'])->name('save.vehicule');
 Route::get('/getVehiculeDetails/{id}',[VehiculeController::class, 'getVehiculeDetails'])->name('get.vehicule.details');
+Route::get('/getAffectedConducteur/{id}',[VehiculeController::class, 'getAffectedConducteur'])->name('get.affected.conducteur');
+
 Route::post('/updateVehicule',[VehiculeController::class, 'updateVehicule'])->name('update.vehicule.details');
 Route::post('/deleteVehicule/{id}',[VehiculeController::class, 'deleteVehicule'])->name('delete.vehicule');
 
@@ -71,8 +73,10 @@ Route::post('/updateAffectation',[AffectationController::class, 'updateAffectati
 Route::post('/disableAffectation/{id}',[AffectationController::class, 'disableAffectation'])->name('disable.affectation');
 
 
-Route::get('/bilansjournaliers-list',[BilanJournalierController::class, 'index'])->name('bilansjournaliers.list');
+Route::get('/dates-bilansjournaliers-list',[BilanJournalierController::class, 'indexDates'])->name('dates.bilansjournaliers.list');
+Route::get('/vehicules-bilansjournaliers-list/{date}',[BilanJournalierController::class, 'indexVehicules'])->name('vehicules.bilansjournaliers.list');
 Route::get('/newBilanjournalier',[BilanJournalierController::class, 'showAddPage'])->name('new.bilanjournalier');
+Route::post('/infoNewBilanjournalier',[BilanJournalierController::class, 'showNewInfoPage'])->name('info.bilanjournalier');
 Route::get('/editBilanjournalier/{id}',[BilanJournalierController::class, 'showEditPage'])->name('edit.bilanjournalier');
 Route::post('/save-bilanjournalier', [BilanJournalierController::class, 'saveBilanjournalier'])->name('save.bilanjournalier');
 Route::get('/getBilanJournalierDetails/{id}',[BilanJournalierController::class, 'getBilanjournalierDetails'])->name('get.bilanjournalier.details');

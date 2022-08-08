@@ -77,6 +77,20 @@ class VehiculeController extends Controller
         return view('vehicules.details-vehicule', compact('vehicule','conducteur'));
     }
 
+    public function getAffectedConducteur($id){
+        $conducteur = Vehicule::join('affectations','vehicules.id','=','affectations.vehicule_id')
+            ->join('conducteurs','affectations.conducteur_id','=','conducteurs.id')
+            ->latest('affectations.date_realisation')
+            ->where('vehicules.id', $id)
+            ->whereNull('affectations.date_fin')
+            ->get(['affectations.conducteur_id','conducteurs.nom_c','conducteurs.prenom_c']);
+            // ->get(['affectations.conducteur_id','conducteurs.nom_c','conducteurs.prenom_c']);
+
+        // return response()->json($conducteur);
+        return compact('conducteur');
+        // return $conducteur;
+    }
+
     public function showEditPage($id){
         $vehicule = Vehicule::find($id);
         $modeles = Modele::join('marques','modeles.marque_id','=','marques.id')->get(['modeles.*','marques.*']);

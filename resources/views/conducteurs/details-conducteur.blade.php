@@ -70,7 +70,7 @@
                         <a class="link-fx fs-3 text-primary" href="javascript:void(0)">{{ date('d/m/Y H:i', strtotime($conducteur->created_at)) }}</a>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="fw-semibold text-dark mb-1">ARGENT RAPPORTÉ</div>
+                        <div class="fw-semibold text-dark mb-1">GAINS GÉNÉRÉS</div>
                         <a class="link-fx fs-3 text-primary" href="javascript:void(0)">$3.580,00</a>
                     </div>
                     <div class="col-6 col-md-3">
@@ -80,7 +80,7 @@
                     <div class="col-6 col-md-3">
                         <div class="fw-semibold text-dark mb-1">Affecté à</div>
                     @if (count($vehicule) === 0)
-                        Non affecté {{-- <a class="link-fx fs-3 text-primary" href="{{ route('get.vehicule.details',['id'=>$vehicule[0]->vehicule_id]) }}">{{ $vehicule[0]->immatriculation}}</a> --}}
+                        Non affecté
                     @else
                         <a class="link-fx fs-3 text-primary" href="{{ route('get.vehicule.details',['id'=>$vehicule[0]->vehicule_id]) }}">{{ $vehicule[0]->immatriculation}}</a>
                     @endif

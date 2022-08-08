@@ -76,7 +76,7 @@
                         <a class="link-fx fs-3 text-primary" href="javascript:void(0)">{{ date('d/m/Y', strtotime($vehicule[0]->date_acquisition)) }}</a>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="fw-semibold text-dark mb-1">ARGENT RAPPORTÉ</div>
+                        <div class="fw-semibold text-dark mb-1">GAINS GÉNÉRÉS</div>
                         <a class="link-fx fs-3 text-primary" href="javascript:void(0)">$3.580,00</a>
                     </div>
                     <div class="col-6 col-md-3">

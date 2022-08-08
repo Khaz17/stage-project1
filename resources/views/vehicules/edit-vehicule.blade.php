@@ -123,7 +123,7 @@
                         </div>
                     </div>
                     <div class="form-group text-center m-3">
-                        <button type="submit" class="btn btn-success js-click-ripple-enabled rounded-0" data-toggle="click-ripple" style="overflow: hidden; position: relative; z-index: 1;"><span class="click-ripple animate" style="height: 92px; width: 92px; top: -24.0001px; left: -14.2626px;"></span>Enregistrer</button>
+                        <button type="submit" class="btn btn-success js-click-ripple rounded-0" data-toggle="click-ripple" style="overflow: hidden; position: relative; z-index: 1;"><span class="click-ripple animate" style="height: 92px; width: 92px; top: -24.0001px; left: -14.2626px;"></span>Enregistrer</button>
                     </div>
                 </form>
             </div>

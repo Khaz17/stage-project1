@@ -9,6 +9,8 @@ class BilanJournalier extends Model
 {
     use HasFactory;
 
+    public $table = 'bilans_journaliers';
+
     public function vehicule(){
         return $this->belongsTo(Vehicule::class);
     }

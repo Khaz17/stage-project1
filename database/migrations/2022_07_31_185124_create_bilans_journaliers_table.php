@@ -18,10 +18,12 @@ class CreateBilansJournaliersTable extends Migration
             $table->integer('kilometrage');
             $table->integer('qte_essence_consommee');
             $table->integer('recette_journaliere');
-            $table->dateTime('date_bilan');
+            $table->date('date_bilan');
             $table->timestamps();
 
             $table->foreignId('vehicule_id')->constrained();
+            $table->foreignId('conducteur_id')->constrained();
+            $table->unique(['date_bilan', 'vehicule_id']);
         });
     }
 

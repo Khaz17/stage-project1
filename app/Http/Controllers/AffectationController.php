@@ -81,10 +81,11 @@ class AffectationController extends Controller
     //     }
     // }
 
-    // public function getAffectationDetails($id){
-    //     $conducteur = Conducteur::find($id);
-    //     return view('affectations.details-affectation','conducteur');
-    // }
+    public function getAffectationDetails($id){
+        $affectation = Affectation::find($id)
+                                    ->join('conducteur');
+        return view('affectations.details-affectation','affectation');
+    }
 
     // public function deleteAffectation($id){
     //     $affectation = Affectation::find($id);

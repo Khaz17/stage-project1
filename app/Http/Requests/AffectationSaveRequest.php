@@ -24,7 +24,7 @@ class AffectationSaveRequest extends FormRequest
     public function rules()
     {
         return [
-            'date_realisation' => 'required|date|before:today',
+            'date_realisation' => 'required|date|before_or_equal:today',
             'vehicule' => 'required|not_in:0',
             'conducteur' => 'required|not_in:0',
         ];

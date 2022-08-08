@@ -365,8 +365,8 @@
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('bilans-journaliers/bilansjournaliers.list') ? ' active' : '' }}"
-                                        href="{{ route('bilansjournaliers.list') }}">
+                                    <a class="nav-main-link{{ request()->is('bilans-journaliers/dates.bilansjournaliers.list') ? ' active' : '' }}"
+                                        href="{{ route('dates.bilansjournaliers.list') }}">
                                         <span class="nav-main-link-name">Liste</span>
                                     </a>
                                 </li>
