@@ -45,6 +45,7 @@
                             <tr>
                                 <th>Véhicule</th>
                                 <th style="width: 50%">Recette de la journée</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +53,11 @@
                                 <tr>
                                     <td><a href="#" id="showDetails" data-id="{{ $vbj->id }}">{{ $vbj->immatriculation }}</a></td>
                                     <td>{{ number_format($vbj->recette_journaliere, 2, ',', ' ') }} FCFA</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-alt-danger" data-id="{{ $vbj->id }}" id="deleteBjBtn" data-bs-toggle="tooltip" title="Supprimer bilan">
+                                        <i class="fa fa-fw fa-times"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

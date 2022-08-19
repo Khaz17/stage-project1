@@ -38,12 +38,12 @@
     @endif
 
 
-
+{{-- 
     {{$prebj}}
     {{$vehicule}}
     {{$idc}}
     {{$date}}
-    {{$recette_hebdo}}
+    {{$recette_hebdo}} --}}
 
     <!-- Page Content -->
     <div class="content">

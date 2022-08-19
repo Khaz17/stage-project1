@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\VehiculeSaveRequest;
 use App\Http\Requests\VehiculeUpdateRequest;
 use App\Models\Affectation;
+use App\Models\BilanJournalier;
 use App\Models\Modele;
 use App\Models\TypeMoteur;
 use App\Models\Vehicule;
@@ -74,7 +75,14 @@ class VehiculeController extends Controller
             ->where('vehicules.id',$id)
             ->where('affectations.date_fin',null)
             ->get(['affectations.conducteur_id','conducteurs.nom_c','conducteurs.prenom_c']);
-        return view('vehicules.details-vehicule', compact('vehicule','conducteur'));
+
+        $gg = BilanJournalier::where('vehicule_id', $id)
+            ->sum('recette_journaliere');
+
+        $bjs = BilanJournalier::where('vehicule_id', $id)
+                                ->join('conducteurs', 'bilans_journaliers.conducteur_id','=','conducteurs.id')
+                                ->get();
+        return view('vehicules.details-vehicule', compact('vehicule','conducteur','gg','bjs'));
     }
 
     public function getAffectedConducteur($id){

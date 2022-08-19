@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ConducteurSaveRequest;
 use App\Http\Requests\ConducteurUpdateRequest;
 use App\Models\Affectation;
+use App\Models\BilanJournalier;
 use App\Models\Conducteur;
 use Carbon\Carbon;
 use DataTables;
@@ -81,8 +82,11 @@ class ConducteurController extends Controller
                                 ->where('affectations.date_fin',null)
                                 ->get(['affectations.vehicule_id','vehicules.immatriculation']);
 
+        $gg = BilanJournalier::where('conducteur_id', $id)
+                            ->sum('recette_journaliere');
+
         $conducteur->scan_permis = json_decode($conducteur->scan_permis);
-        return view('conducteurs.details-conducteur', compact('conducteur','vehicule'));
+        return view('conducteurs.details-conducteur', compact('conducteur','vehicule','gg'));
         // return view('conducteurs.test', compact('conducteur','vehicule'));
     }
 

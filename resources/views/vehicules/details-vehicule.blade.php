@@ -77,7 +77,11 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="fw-semibold text-dark mb-1">GAINS GÉNÉRÉS</div>
-                        <a class="link-fx fs-3 text-primary" href="javascript:void(0)">$3.580,00</a>
+                        @if ($gg === 0)
+                            <p>[ ]</p>
+                        @else
+                            <p class="fs-3 text-primary" href="#">{{ number_format($gg, 2, ',', ' ') }} FCFA</p>
+                        @endif
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="fw-semibold text-dark mb-1">Usage</div>
@@ -142,6 +146,51 @@
                 </div>
             </div>
         </div>
+
+        <!-- Bilans journaliers -->
+        @if (count($bjs) > 0)
+            <div class="block block-rounded">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Bilans journaliers du véhicule</h3>
+                </div>
+                <div class="block-content">
+                    <div id="bjs-table" class="p-2">
+                        <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                            <thead>
+                                <tr>
+                                    {{-- <th>#</th> --}}
+                                    <th>Date</th>
+                                    <th>Recette</th>
+                                    <th>Kilométrage</th>
+                                    <th>Essence consommée</th>
+                                    <th>Conducteur</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($bjs as $bj)
+                                    <tr>
+                                        {{-- <td>{{ $bj[0]->id }}</td> --}}
+                                        <td>{{ date('d/m/Y', strtotime($bj->date_bilan)) }}</td>
+                                        <td>{{ number_format($bj->recette_journaliere, 2, ',', ' ') }} F CFA</td>
+                                        <td>{{ number_format($bj->kilometrage, 2, ',', ' ') }}</td>
+                                        <td>{{ $bj->qte_essence_consommee }}</td>
+                                        <td>{{ $bj->nom_c }} {{ $bj->prenom_c }}</td>
+                                        <td>
+                                            {{-- <div class="btn-group">
+                                                <a type="button" class="btn btn-sm btn-alt-success" href="{{ url('/getConducteurDetails/'.$conducteur->id) }}" id="showConducteurDetails" data-bs-toggle="tooltip" title="Afficher détails conducteur"><i class="far fa-fw fa-eye"></i></a>
+                                                <button type="button" class="btn btn-sm btn-alt-danger" data-id="{{ $conducteur->id }}" id="deleteConducteurBtn" data-bs-toggle="tooltip" title="Supprimer conducteur">
+                                                <i class="fa fa-fw fa-times"></i>
+                                                </button>
+                                            </div> --}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        @endif
 
         <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
         <script src="{{ asset('js/functions/vehicules.js') }}"></script>

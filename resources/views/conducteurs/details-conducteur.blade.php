@@ -71,7 +71,11 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="fw-semibold text-dark mb-1">GAINS GÉNÉRÉS</div>
-                        <a class="link-fx fs-3 text-primary" href="javascript:void(0)">$3.580,00</a>
+                        @if ($gg === 0)
+                            <p>[ ]</p>
+                        @else
+                            <p class="fs-3 text-primary" href="#">{{ number_format($gg, 2, ',', ' ') }} FCFA</p>
+                        @endif
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="fw-semibold text-dark mb-1">Disponibilité</div>

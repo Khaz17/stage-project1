@@ -40,4 +40,38 @@ $(function(){
         })
     })
 
+    $(function(){
+        $(document).on('click', '#deleteBjBtn', function () {
+            var bj_id = $(this).data('id');
+            Swal.fire({
+                title: 'Êtes vous sûr ?',
+                text: 'Vous voulez supprimer ce bilan',
+                icon: 'warning',
+                confirmButtonText: 'Supprimer',
+                cancelButtonText: 'Annuler',
+                showCancelButton: true,
+                showCloseButton: true
+            }).then(function(result){
+                if(result.value){
+                    $.ajax({
+                        headers:{
+                            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+                        },
+                        url:'/deleteBilanjournalier/'+bj_id,
+                        method:'POST',
+                        success:function(data){
+                            if (data.code == 0) {
+                                toastr.error(data.msg);
+                            } else {
+                                toastr.success(data.msg);
+                                window.location = '/dates-bilansjournaliers-list';
+                            }
+                        }
+                    })
+                }
+            })
+        })
+    })
+
+
 })
